@@ -1,0 +1,27 @@
+source 'https://rubygems.org'
+
+ruby '2.3.1'
+
+group :style, :bundler, :unit, :integration do
+  gem 'rake'
+end
+
+group :style do
+  gem 'foodcritic'
+  gem 'rubocop'
+end
+
+group :bundler do
+  gem 'bundler-audit'
+end
+
+group :unit do
+  gem 'berkshelf'
+  gem 'chefspec'
+  gem 'simplecov'
+end
+
+group :integration do
+  gem 'test-kitchen'
+  gem 'kitchen-vagrant'
+end
