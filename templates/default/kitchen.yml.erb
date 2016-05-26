@@ -5,6 +5,12 @@ driver:
 provisioner:
   name: chef_zero
 
+<% if @use_inspec %>
+verifier:
+  name: inspec
+  format: documentation
+<% end %>
+
 platforms:
   - name: ubuntu-16.04
     driver:

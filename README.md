@@ -9,7 +9,18 @@ Make sure you have [chefdk](https://downloads.chef.io/chef-dk/) installed
 
 git clone this cookbook and generate the new cookbook:
 
-`chef generate cookbook -g ./nc_cookbook_generator <cookbook_name> -m coders@newcontext.com -C "New Context Services, Inc."`
+```
+chef generate cookbook -g ./nc_cookbook_generator <cookbook_name> \
+-m coders@newcontext.com -C "New Context Services, Inc."
+```
+
+#### Options
+
+- To use inspec instead of the default serverspec, export this environment variable before running the generator
+
+```
+TK_FRAMEWORK=inspec
+```
 
 ## License & Authors
 **Author:** Engineers ([coders@newcontext.com](mailto:coders@newcontext.com))

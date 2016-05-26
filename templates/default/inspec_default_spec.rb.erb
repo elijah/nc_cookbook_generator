@@ -1,0 +1,8 @@
+require_relative '../../helpers/inspec/spec_helper'
+
+# Inspec examples can be found at
+# https://github.com/chef/inspec/blob/master/docs/resources.rst
+
+describe command('chef-client') do
+  it { should exist }
+end

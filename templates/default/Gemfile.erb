@@ -24,4 +24,5 @@ end
 group :integration do
   gem 'test-kitchen'
   gem 'kitchen-vagrant'
+  <%= "gem 'kitchen-inspec'" if @use_inspec %>
 end

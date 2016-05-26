@@ -1,6 +1,6 @@
 require 'serverspec'
-<% titleized = cookbook_name.split(/ |\_/).map(&:capitalize).join %>
-module <%= titleized %>
+
+module <%= @titleized %>
   module Helper
   end
 end
@@ -13,6 +13,6 @@ else
 end
 
 RSpec.configure { |config|
-  config.extend <%= titleized %>::Helper
-  config.include <%= titleized %>::Helper
+  config.extend <%= @titleized %>::Helper
+  config.include <%= @titleized %>::Helper
 }

@@ -36,10 +36,22 @@ else
 
 end
 
+tk_framework = ENV['TK_FRAMEWORK']
+
+if ENV['TK_FRAMEWORK'] == 'inspec'
+  use_inspec = true
+else
+  use_inspec = false
+  tk_framework = 'serverspec'
+end
+
 # TK & Serverspec
 template "#{cookbook_dir}/.kitchen.yml" do
   if context.use_berkshelf
     source 'kitchen.yml.erb'
+    variables(
+      use_inspec: use_inspec
+    )
   else
     source 'kitchen_policyfile.yml.erb'
   end
@@ -48,21 +60,24 @@ template "#{cookbook_dir}/.kitchen.yml" do
   action :create_if_missing
 end
 
-directory "#{cookbook_dir}/test/integration/default/serverspec" do
+directory "#{cookbook_dir}/test/integration/default/#{tk_framework}" do
   recursive true
 end
 
-directory "#{cookbook_dir}/test/integration/helpers/serverspec" do
+directory "#{cookbook_dir}/test/integration/helpers/#{tk_framework}" do
   recursive true
 end
 
-cookbook_file "#{cookbook_dir}/test/integration/helpers/serverspec/spec_helper.rb" do
-  source 'serverspec_spec_helper.rb'
+template "#{cookbook_dir}/test/integration/helpers/#{tk_framework}/spec_helper.rb" do
+  source "#{tk_framework}_spec_helper.rb.erb"
+  variables(
+    titleized: context.cookbook_name.split(%r{ |\_}).map(&:capitalize).join
+  )
   action :create_if_missing
 end
 
-template "#{cookbook_dir}/test/integration/default/serverspec/default_spec.rb" do
-  source 'serverspec_default_spec.rb.erb'
+template "#{cookbook_dir}/test/integration/default/#{tk_framework}/default_spec.rb" do
+  source "#{tk_framework}_default_spec.rb.erb"
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
 end
@@ -114,7 +129,11 @@ if context.have_git
 end
 
 # Gemfile
-cookbook_file "#{cookbook_dir}/Gemfile" do
+template "#{cookbook_dir}/Gemfile" do
+  source 'Gemfile.erb'
+  variables(
+    use_inspec: use_inspec
+  )
   action :create
 end
 
