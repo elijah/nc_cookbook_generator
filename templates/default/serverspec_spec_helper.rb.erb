@@ -1,0 +1,18 @@
+require 'serverspec'
+
+module <%= @titleized %>
+  module Helper
+  end
+end
+
+if (%r{/cygwin|mswin|mingw|bccwin|wince|emx} =~ RUBY_PLATFORM).nil?
+  set :backend, :exec
+else
+  set :backend, :cmd
+  set :os, family: 'windows'
+end
+
+RSpec.configure { |config|
+  config.extend <%= @titleized %>::Helper
+  config.include <%= @titleized %>::Helper
+}

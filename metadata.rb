@@ -1,0 +1,10 @@
+name 'nc_cookbook_generator'
+maintainer 'New Context Services, Inc.'
+maintainer_email 'coders@newcontext.com'
+license 'Apache v2.0'
+description 'Custom code generator cookbook for use with ChefDK'
+long_description 'Custom code generator cookbook for use with ChefDK'
+version '0.1.0'
+
+issues_url 'https://github.com/newcontext/nc_cookbook_generator/issues'
+source_url 'https://github.com/newcontext/nc_cookbook_generator'

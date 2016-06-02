@@ -1,0 +1,11 @@
+require 'inspec'
+
+module <%= @titleized %>
+  module Helper
+  end
+end
+
+RSpec.configure { |config|
+  config.extend <%= @titleized %>::Helper
+  config.include <%= @titleized %>::Helper
+}
