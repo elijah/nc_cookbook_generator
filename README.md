@@ -4,6 +4,7 @@ Cookbook generator to follow a set of standards we use at New Context Services, 
 
 ## Requirements
 Make sure you have [chefdk](https://downloads.chef.io/chef-dk/) installed
+You must also have pip available - ```brew install python``` provides this on current homebrew.
 
 ## Usage
 
